@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxOmSizewiseLTVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery>
+    <![CDATA[SELECT XxOmSizewiseLTEO.LINE_ID, 
+       XxOmSizewiseLTEO.HEADER_ID, 
+       XxOmSizewiseLTEO.SIZE_NAME, 
+       XxOmSizewiseLTEO.QTY, 
+       XxOmSizewiseLTEO.CREATED_BY, 
+       XxOmSizewiseLTEO.CREATION_DATE, 
+       XxOmSizewiseLTEO.LAST_UPDATED_BY, 
+       XxOmSizewiseLTEO.LAST_UPDATED_DATE, 
+       XxOmSizewiseLTEO.BPO_ID,
+       (select SUM(QTY)   FROM XX_OM_SIZEWISE_L_T A
+         WHERE A.Bpo_ID = XxOmSizewiseLTEO.BPO_Id)
+        Total_Size_Quantity,
+        bpo.Bpo
+        
+FROM XX_OM_SIZEWISE_L_T XxOmSizewiseLTEO, XX_OM_BPO_INFO_T bpo
+where XxOmSizewiseLTEO.bpo_id=bpo.bpo_id]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="XxOmSizewiseLTEO"
+    Entity="model.entity.XxOmSizewiseLTEO"/>
+  <ViewAttribute
+    Name="LineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="HeaderId"
+    PrecisionRule="true"
+    EntityAttrName="HeaderId"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="HEADER_ID"/>
+  <ViewAttribute
+    Name="SizeName"
+    PrecisionRule="true"
+    EntityAttrName="SizeName"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="SIZE_NAME"/>
+  <ViewAttribute
+    Name="Qty"
+    PrecisionRule="true"
+    EntityAttrName="Qty"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="QTY"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedDate"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="LAST_UPDATED_DATE"/>
+  <ViewAttribute
+    Name="BpoId"
+    PrecisionRule="true"
+    EntityAttrName="BpoId"
+    EntityUsage="XxOmSizewiseLTEO"
+    AliasName="BPO_ID"/>
+  <ViewAttribute
+    Name="TotalSizeQuantity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_SIZE_QUANTITY"
+    Expression="TOTAL_SIZE_QUANTITY"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Bpo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BPO"
+    Expression="BPO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="searchPG">
+    <page>/searchPG.jspx</page>
+    <input-page-parameter>
+      <from-value>#{param.PocId}</from-value>
+      <to-value>#{viewScope.PocId}</to-value>
+    </input-page-parameter>
+  </view>
+  <view id="SearchPg">
+    <page>/ViewPg.jspx</page>
+  </view>
+  <managed-bean id="__3">
+    <managed-bean-name id="__1">backinbean</managed-bean-name>
+    <managed-bean-class id="__4">xx_om_bpo.main</managed-bean-class>
+    <managed-bean-scope id="__2">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__7">
+    <managed-bean-name id="__5">bpobean</managed-bean-name>
+    <managed-bean-class id="__6">xx_om_bpo.BPO</managed-bean-class>
+    <managed-bean-scope id="__8">request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

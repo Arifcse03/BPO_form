@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelFormLayout id="pfl1">
+          <af:inputText value="#{bindings.p.inputValue}"
+                        label="#{bindings.p.hints.label}"
+                        required="#{bindings.p.hints.mandatory}"
+                        columns="#{bindings.p.hints.displayWidth}"
+                        maximumLength="#{bindings.p.hints.precision}"
+                        shortDesc="#{bindings.p.hints.tooltip}" id="it1">
+            <f:validator binding="#{bindings.p.validator}"/>
+          </af:inputText>
+          <af:commandButton actionListener="#{bindings.ExecuteWithParams.execute}"
+                            text="ExecuteWithParams"
+                            disabled="#{!bindings.ExecuteWithParams.enabled}"
+                            id="cb1"/>
+        </af:panelFormLayout>
+        <af:panelCollection id="pc1"
+                            inlineStyle="color:Green; font-family:Geneva, Arial, Helvetica, sans-serif; font-size:small; font-weight:600; text-decoration:underline; border-color:Black; border-style:solid; outline-color:Black; outline-style:solid; text-align:center;">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.SumOfView_bpo_info_t1.collectionModel}"
+                    var="row" rows="#{bindings.SumOfView_bpo_info_t1.rangeSize}"
+                    emptyText="#{bindings.SumOfView_bpo_info_t1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.SumOfView_bpo_info_t1.rangeSize}"
+                    rowBandingInterval="0"
+                    filterModel="#{bindings.SumOfView_bpo_info_t1Query.queryDescriptor}"
+                    queryListener="#{bindings.SumOfView_bpo_info_t1Query.processQuery}"
+                    filterVisible="true" varStatus="vs"
+                    selectedRowKeys="#{bindings.SumOfView_bpo_info_t1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SumOfView_bpo_info_t1.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t1"
+                    partialTriggers=":::cb1"
+                    inlineStyle="background-color:Window;">
+            <af:column sortProperty="PocId" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.PocId.label}"
+                       id="c21">
+              <af:outputText value="#{row.PocId}" id="ot9">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.PocId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="FobId" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.FobId.label}"
+                       id="c12">
+              <af:outputText value="#{row.FobId}" id="ot18">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.FobId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="SystemId" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.SystemId.label}"
+                       id="c3">
+              <af:outputText value="#{row.SystemId}" id="ot22">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.SystemId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="BuyerId" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.BuyerId.label}"
+                       id="c11">
+              <af:outputText value="#{row.BuyerId}" id="ot15">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.BuyerId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="Season" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Season.label}"
+                       id="c18">
+              <af:outputText value="#{row.Season}" id="ot11"/>
+            </af:column>
+            <af:column sortProperty="Style" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Style.label}"
+                       id="c20">
+              <af:outputText value="#{row.Style}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="WashName" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.WashName.label}"
+                       id="c7">
+              <af:outputText value="#{row.WashName}" id="ot14"/>
+            </af:column>
+            <af:column sortProperty="Color" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Color.label}"
+                       id="c22">
+              <af:outputText value="#{row.Color}" id="ot21"/>
+            </af:column>
+            <af:column sortProperty="BpoId" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.BpoId.label}"
+                       id="c16">
+              <af:outputText value="#{row.BpoId}" id="ot12">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.BpoId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="Bpo" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Bpo.label}"
+                       id="c8">
+              <af:outputText value="#{row.Bpo}" id="ot19"/>
+            </af:column>
+            <af:column sortProperty="Qty" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Qty.label}"
+                       id="c19">
+              <af:outputText value="#{row.Qty}" id="ot8">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.Qty.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="Fob" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Fob.label}"
+                       id="c13">
+              <af:outputText value="#{row.Fob}" id="ot13">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.Fob.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="Shipdate" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Shipdate.label}"
+                       id="c5">
+              <af:outputText value="#{row.Shipdate}" id="ot3"/>
+            </af:column>
+            <af:column sortProperty="Classification" filterable="true"
+                       sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Classification.label}"
+                       id="c2">
+              <af:outputText value="#{row.Classification}" id="ot5"
+                             inlineStyle="&quot;background-color:#{row.bindings.Classification.inputValue == 'TBA' ? 'Red' : 'Blue'};&quot;"/>
+            </af:column>
+            <af:column sortProperty="PoType" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.PoType.label}"
+                       id="c10">
+              <af:outputText value="#{row.PoType}" id="ot20"/>
+            </af:column>
+            <af:column sortProperty="Parent" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Parent.label}"
+                       id="c6">
+              <af:outputText value="#{row.Parent}" id="ot16">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.Parent.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="BpoStatus" filterable="true"
+                       sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.BpoStatus.label}"
+                       id="c17">
+              <af:outputText value="#{row.BpoStatus}" id="ot7">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.BpoStatus.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="Incoterms" filterable="true"
+                       sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Incoterms.label}"
+                       id="c4">
+              <af:outputText value="#{row.Incoterms}" id="ot17"/>
+            </af:column>
+            <af:column sortProperty="Enddate" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Enddate.label}"
+                       id="c14">
+              <af:outputText value="#{row.Enddate}" id="ot6"/>
+            </af:column>
+            <af:column sortProperty="Shipmode" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Shipmode.label}"
+                       id="c15">
+              <af:outputText value="#{row.Shipmode}" id="ot10"/>
+            </af:column>
+            <af:column sortProperty="Country" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.Country.label}"
+                       id="c9">
+              <af:outputText value="#{row.Country}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="SlNo" filterable="true" sortable="true"
+                       headerText="#{bindings.SumOfView_bpo_info_t1.hints.SlNo.label}"
+                       id="c1">
+              <af:outputText value="#{row.SlNo}" id="ot4">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SumOfView_bpo_info_t1.hints.SlNo.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

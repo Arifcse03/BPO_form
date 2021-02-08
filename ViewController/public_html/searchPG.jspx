@@ -1,0 +1,1017 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1"
+               inlineStyle="border-color:Black; border-style:solid; outline-color:Black; outline-style:solid; border-width:2px; outline-width:2px; text-align:center; vertical-align:middle;"
+               usesUpload="true">
+        <af:panelHeader text="  Buyer Purchase Order (BPO)" id="ph1"
+                        inlineStyle="text-align:center; vertical-align:middle;#{row.row.entities[0].entityState==2 ? 'background-color:orange' : row.row.entities[0].entityState==0 ? 'background-color:darkgreen' : ''}">
+          <f:facet name="context">
+            <af:statusIndicator id="si7"/>
+          </f:facet>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelGroupLayout layout="vertical" id="pgl1"
+                               inlineStyle="width:auto;">
+            <af:panelHeader text=" " id="ph2"
+                            inlineStyle="background-color:transparent;">
+              <af:panelFormLayout id="pfl1" maxColumns="6" rows="1"
+                                  inlineStyle="background-color:Gray;">
+                <af:inputText
+                              label="PocId:"
+                              required="#{bindings.PocId.hints.mandatory}"
+                              columns="#{bindings.PocId.hints.displayWidth}"
+                              maximumLength="#{bindings.PocId.hints.precision}"
+                              shortDesc="#{bindings.PocId.hints.tooltip}"
+                              id="it10" autoSubmit="true"
+                              inlineStyle="color:MenuText;"
+                              value="#{bindings.PocId.inputValue}"
+                             binding="#{backinbean.pocID_inputField}">
+                  <f:validator binding="#{bindings.PocId.validator}"/>
+                </af:inputText>
+                <af:commandButton text="Search" id="cb20"
+                                  action="#{backinbean.action_call}"
+                                  partialSubmit="true"
+                                  inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:small; font-weight:bolder; background-color:White; border-color:Black; border-width:2.0px; border-style:solid;"/>
+                <af:outputText value="#{viewScope.PocId}" id="ot26"
+                               inlineStyle="color:White; font-size:large;"
+                               binding="#{backinbean.poCIDfrompoc}"/>
+                <af:commandButton actionListener="#{bindings.getpocid.execute}"
+                                  text="getpocid"
+                                  disabled="#{!bindings.getpocid.enabled}"
+                                  id="cb21" useWindow="true" visible="false"/>
+              </af:panelFormLayout>
+            </af:panelHeader>
+            <af:panelCollection id="pc1"
+                                inlineStyle="width:auto; height:500px; color:Green; font-weight:600; font-family:'Times New Roman', 'Arial Black', times, Serif;">
+              <f:facet name="menus">
+                <af:menu text="Option" id="m2">
+                  <af:commandMenuItem text="Download CVS Format For Bpo" id="cmi2">
+                    <af:fileDownloadActionListener filename="Bpo file upload format.csv"
+                                                   method="#{bpobean.bpoUploadFormat}"
+                                                   contentType="text/csv"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text="Show total sum " id="cmi3">
+                    <af:showPopupBehavior popupId="::p2"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text="Download CVS Format For Multiple SizeBrk"
+                                      id="cmi1" partialSubmit="true">
+                    <af:fileDownloadActionListener method="#{bpobean.SIzewiseUploadFormat}"
+                                                   contentType="text/csv"
+                                                   filename="Multiple bpo upload format.csv"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text=" Upload Multiple Sizebrkdwn" id="cmi4">
+                    <af:showPopupBehavior popupId="::p5"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                  <af:commandButton text="Download CVS Format For Multiple SizeBrk" id="cb19" partialSubmit="true"
+                                    visible="false">
+                    <af:fileDownloadActionListener method="#{bpobean.SIzewiseUploadFormat}"
+                                                   contentType="text/csv"
+                                                   filename="Multiple bpo upload format.csv"/>
+                  </af:commandButton>
+                  <af:spacer width="10" height="10" id="s1"/>
+                  <af:commandButton
+                                    id="cb1" icon="/icon/create-new.png"
+                                    inlineStyle="color:Window; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Insert new Data"
+                                    action="#{backinbean.CreareCustom}"
+                                    partialSubmit="true"/>
+                  <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                    disabled="#{!bindings.Delete.enabled}"
+                                    id="cb2"
+                                    icon="/icon/delete_red - Copy.png"
+                                    inlineStyle="color:Window; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Delect selected row"/>
+                  <af:commandButton actionListener="#{bindings.Commit.execute}"
+                                    id="cb3" disabled="false"
+                                    icon="/icon/save new.png"
+                                    inlineStyle="color:Window; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="save all" visible="false"/>
+                  <af:commandButton id="cb7" immediate="true"
+                                    action="#{backinbean.customsave}"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Custom Save All Data"
+                                    icon="/icon/save new.png"/>
+                  <af:commandButton id="cb6" immediate="true"
+                                    action="#{backinbean.copy}"
+                                    icon="/icon/clipboard-copy-512.png"
+                                    inlineStyle="color:Window; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Copy This Row"/>
+                  <af:commandButton text="Export" id="cb8"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;">
+                    <af:exportCollectionActionListener exportedId="t2"
+                                                       type="excelHTML"
+                                                       filename="BuyerPurchaseOrder(BPO).xls"
+                                                       title="bpo"/>
+                  </af:commandButton>
+                  <af:commandButton text="Download CVS Format For Bpo" id="cb9"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    immediate="true" disabled="false"
+                                    visible="false">
+                    <af:fileDownloadActionListener filename="Bpo file upload format.csv"
+                                                   method="#{bpobean.bpoUploadFormat}"
+                                                   contentType="text/csv"/>
+                  </af:commandButton>
+                  <af:commandButton text="Multiple SizeBrkUP" id="cb15"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    visible="false">
+                    <af:showPopupBehavior popupId="::p4"/>
+                  </af:commandButton>
+                  <af:commandButton text="Show total sum " id="cb5"
+                                    binding="#{backinbean.showSumBtn}"
+                                    partialSubmit="true" immediate="true"
+                                    disabled="false"
+                                    inlineStyle="border-color:Black; border-style:solid; border-width:2.0px;"
+                                    shortDesc="Show details with sum"
+                                    visible="false">
+                    <af:showPopupBehavior popupId="::p2"/>
+                  </af:commandButton>
+                  <af:commandButton text="Sizebrk Upload" id="cb4"
+                                    visible="false" partialSubmit="true"
+                                    inlineStyle="color:Black; font-family:'Courier New', Courier, monospace; border-color:Black; border-style:solid; border-width:2.0px;">
+                    <af:showPopupBehavior popupId="::p5"/>
+                  </af:commandButton>
+                  <af:inputFile label="Import BPO" id="if1"
+                                inlineStyle="border-color:Black; border-style:solid; border-width:2px; width:10.0px;"
+                                valueChangeListener="#{bpobean.bpoUpload}"
+                                autoSubmit="true"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.XxOmBpoInfoTVO1.collectionModel}"
+                        var="row" rows="#{bindings.XxOmBpoInfoTVO1.rangeSize}"
+                        emptyText="#{bindings.XxOmBpoInfoTVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.XxOmBpoInfoTVO1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.XxOmBpoInfoTVO1Query.queryDescriptor}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.XxOmBpoInfoTVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxOmBpoInfoTVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t2"
+                        partialTriggers="::cb1 ::cb2 ::if1 :::cb20 :::cb21" editingMode="clickToEdit"
+                        binding="#{backinbean.bpoTable}"
+                        queryListener="#{bindings.XxOmBpoInfoTVO1Query.processQuery}">
+                <af:column sortProperty="PocId" sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.PocId.label}"
+                           id="c14" width="10" visible="false">
+                  <af:outputText value="#{row.PocId}" id="ot3">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.PocId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="BuyerId" sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.BuyerId.label}"
+                           id="c19" width="10" visible="false"
+                           inlineStyle="background-color:ActiveBorder; color:Black; ">
+                  <af:outputText value="#{row.BuyerId}" id="ot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.BuyerId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="FobId"
+                           sortable="true" headerText="Fob-Id" id="c18"
+                           width="140" align="center"
+                           showRequired="true" filterable="true">
+                  <af:outputText value="#{row.FobId}" id="ot34">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.FobId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="BpoId"
+                           sortable="true"
+                           headerText="Bpo Id"
+                           id="c11" width="55" align="center"
+                           showRequired="false" filterable="true">
+                  <af:outputText value="#{row.BpoId}" id="ot33" escape="true">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.BpoId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Bpo" filterable="true" sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Bpo.label}"
+                           id="c3" align="center" width="185"
+                           showRequired="true">
+                  <af:inputText value="#{row.bindings.Bpo.inputValue}"
+                                label="#{bindings.XxOmBpoInfoTVO1.hints.Bpo.label}"
+                                columns="#{bindings.XxOmBpoInfoTVO1.hints.Bpo.displayWidth}"
+                                maximumLength="#{bindings.XxOmBpoInfoTVO1.hints.Bpo.precision}"
+                                shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Bpo.tooltip}"
+                                id="it9" required="true" autoSubmit="true">
+                    <f:validator binding="#{row.bindings.Bpo.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="SystemId"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.SystemId.label}"
+                           id="c21" width="50" visible="false">
+                  <af:outputText value="#{row.SystemId}" id="ot2">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.SystemId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Season"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Season.label}"
+                           id="c20" width="30" visible="false">
+                  <af:outputText value="#{row.Season}" id="ot5"/>
+                </af:column>
+                <af:column sortProperty="Style"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Style.label}"
+                           id="c1" width="30" visible="false">
+                  <af:outputText value="#{row.Style}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="Color"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Color.label}"
+                           id="c8" width="60" visible="true" align="center"
+                           filterable="true">
+                  <af:outputText value="#{row.Color}" id="ot7"/>
+                </af:column>
+                <af:column sortProperty="WashName"
+                           sortable="true"
+                           headerText="Wash Name"
+                           id="c12" width="70" visible="true" align="center"
+                           filterable="true">
+                  <af:outputText value="#{row.WashName}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="Fob" sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Fob.label}"
+                           id="c15" width="60" filterable="true"
+                           inlineStyle="color:Black; font-size:x-small;">
+                  <af:outputText value="#{row.Fob}" id="ot9">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.Fob.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Qty" filterable="true" sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Qty.label}"
+                           id="c6" width="40" align="center"
+                           showRequired="true">
+                  <af:inputText value="#{row.bindings.Qty.inputValue}"
+                                label="#{bindings.XxOmBpoInfoTVO1.hints.Qty.label}"
+                                columns="#{bindings.XxOmBpoInfoTVO1.hints.Qty.displayWidth}"
+                                maximumLength="#{bindings.XxOmBpoInfoTVO1.hints.Qty.precision}"
+                                shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Qty.tooltip}"
+                                 
+                                id="it3" immediate="true" autoSubmit="true"
+                                required="true">
+                    <f:validator binding="#{row.bindings.Qty.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.Qty.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="Classification" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Classification.label}"
+                           id="c4" align="center" width="65"
+                           showRequired="true">
+                  <af:selectOneChoice value="#{row.bindings.Classification.inputValue}"
+                                      label="#{row.bindings.Classification.label}"
+                                      shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Classification.tooltip}"
+                                      id="soc1"
+                                      valueChangeListener="#{backinbean.value}"
+                                      autoSubmit="true" required="true">
+                    <f:selectItems value="#{row.bindings.Classification.items}"
+                                   id="si1"/>
+                    <f:attribute name="rowIndexVal"
+                                 value="#{row.bindings.Classification.items[row.bindings.Classification.inputValue].label}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column headerText="Po Type" id="c9" align="center"
+                           sortProperty="PoType" sortable="true"
+                           filterable="true" width="65"
+                           showRequired="true">
+                  <af:selectOneChoice value="#{row.bindings.PoType.inputValue}"
+                                      label="#{row.bindings.PoType.label}"
+                                      shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.PoType.tooltip}"
+                                      id="soc4" autoSubmit="true"
+                                      required="true">
+                    <f:selectItems value="#{row.bindings.PoType.items}"
+                                   id="si4"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column headerText="#{bindings.XxOmBpoInfoTVO1.hints.Incoterms.label}"
+                           id="c5" width="66" align="center" sortable="true"
+                           filterable="true" sortProperty="Incoterms"
+                           showRequired="true">
+                  <af:selectOneChoice value="#{row.bindings.Incoterms.inputValue}"
+                                      label="#{row.bindings.Incoterms.label}"
+                                      shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Incoterms.tooltip}"
+                                      id="soc3" required="true"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{row.bindings.Incoterms.items}"
+                                   id="si3"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="Shipmode" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Shipmode.label}"
+                           id="c7" align="center" width="64"
+                           showRequired="true">
+                  <af:selectOneChoice value="#{row.bindings.Shipmode.inputValue}"
+                                      label="#{row.bindings.Shipmode.label}"
+                                      shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Shipmode.tooltip}"
+                                      id="soc2" required="true"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{row.bindings.Shipmode.items}"
+                                   id="si2"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column headerText="#{bindings.XxOmBpoInfoTVO1.hints.Country.label}"
+                           id="c16" width="70"
+                           showRequired="true" sortable="true"
+                           filterable="true">
+                  <af:selectOneChoice value="#{row.bindings.Country.inputValue}"
+                                      label="#{row.bindings.Country.label}"
+                                      shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Country.tooltip}"
+                                      id="soc5" required="true"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{row.bindings.Country.items}"
+                                   id="si5"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="Shipdate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Shipdate.label}"
+                           id="c17" align="center" width="120"
+                           showRequired="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.Shipdate}"
+                                  id="id3"/>
+                  </f:facet>
+                  <af:inputDate value="#{row.bindings.Shipdate.inputValue}"
+                                label="#{bindings.XxOmBpoInfoTVO1.hints.Shipdate.label}"
+                                shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Shipdate.tooltip}"
+                                id="id2" required="true" autoSubmit="true">
+                    <f:validator binding="#{row.bindings.Shipdate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.XxOmBpoInfoTVO1.hints.Shipdate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column sortProperty="Enddate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Enddate.label}"
+                           id="c2" align="center" width="115">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.Enddate}"
+                                  id="id4"/>
+                  </f:facet>
+                  <af:inputDate value="#{row.bindings.Enddate.inputValue}"
+                                label="#{bindings.XxOmBpoInfoTVO1.hints.Enddate.label}"
+                                required="#{bindings.XxOmBpoInfoTVO1.hints.Enddate.mandatory}"
+                                shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Enddate.tooltip}"
+                                id="id1" autoSubmit="true">
+                    <f:validator binding="#{row.bindings.Enddate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.XxOmBpoInfoTVO1.hints.Enddate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.XxOmBpoInfoTVO1.hints.Status.label}"
+                           id="c13" sortProperty="Status" align="center"
+                           sortable="true" filterable="true"
+                           showRequired="false" width="105">
+                  <af:selectOneChoice value="#{row.bindings.Status.inputValue}"
+                                      label="#{row.bindings.Status.label}"
+                                      shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Status.tooltip}"
+                                      id="soc6" required="true"
+                                       autoSubmit="true"  
+                                    valuePassThru="true">
+                    <f:selectItems value="#{row.bindings.Status.items}"
+                                   id="si6"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="Parent" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmBpoInfoTVO1.hints.Parent.label}"
+                           id="c10" width="60" align="center"
+                           showRequired="true" visible="false">
+                  <af:inputText value="#{row.bindings.Parent.inputValue}"
+                                label="#{bindings.XxOmBpoInfoTVO1.hints.Parent.label}"
+                                required="#{bindings.XxOmBpoInfoTVO1.hints.Parent.mandatory}"
+                                columns="#{bindings.XxOmBpoInfoTVO1.hints.Parent.displayWidth}"
+                                maximumLength="#{bindings.XxOmBpoInfoTVO1.hints.Parent.precision}"
+                                shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Parent.tooltip}"
+                                id="it15" binding="#{backinbean.parent1}">
+                    <f:validator binding="#{row.bindings.Parent.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.Parent.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="c44" headerText="SizeBrkDwn" align="center"
+                           sortable="true" filterable="true">
+                  <af:commandButton text="SizBrkDwn" id="cb10"
+                                    inlineStyle="border-color:Black; border-style:solid; border-width:2.0px;"
+                                    partialSubmit="true">
+                    <af:showPopupBehavior popupId=":::p3" triggerType="action"/>
+                  </af:commandButton>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+        <af:popup id="p1" partialTriggers="pc1:t2:soc1"
+                  binding="#{backinbean.mypopup}">
+          <af:dialog id="d2" type="yesNo"
+                     dialogListener="#{backinbean.dialoghandle}"
+                     inlineStyle="text-align:center; vertical-align:middle; font-weight:bolder;">
+            <af:outputText value="Doe's it has any parent?" id="ot1"
+                           inlineStyle="color:Black; font-family:'Arial Rounded MT Bold';"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p2" contentDelivery="lazyUncached"
+                  popupFetchListener="#{backinbean.ShowSum}">
+          <af:dialog id="d3" type="okCancel" title="Show Details with Sum"
+                     inlineStyle="background-color:rgb(247,247,247); border-width:thin; border-style:solid; text-align:center; vertical-align:middle; border-color:Blue; outline-color:Teal; outline-style:solid; outline-width:3px; width:1300px; height:500.0px;"
+                     resize="on">
+            <af:panelCollection id="pc2"
+                                inlineStyle="color:Black; width:1200.0px; height:450px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.SumOfView_bpo_info_t1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.SumOfView_bpo_info_t1.rangeSize}"
+                        emptyText="#{bindings.SumOfView_bpo_info_t1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.SumOfView_bpo_info_t1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.SumOfView_bpo_info_t1Query.queryDescriptor}"
+                        queryListener="#{bindings.SumOfView_bpo_info_t1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.SumOfView_bpo_info_t1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.SumOfView_bpo_info_t1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t3">
+                <af:column sortProperty="PocId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.PocId.label}"
+                           id="c37" visible="false">
+                  <af:outputText value="#{row.PocId}" id="ot21">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.PocId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="FobId" filterable="true"
+                           sortable="true"
+                           headerText="Fob Id"
+                           id="c30"
+                           inlineStyle="color:Window; background-color:Black;"
+                           align="center" visible="false">
+                  <af:outputText value="#{row.FobId}" id="ot23">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.FobId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Bpo" filterable="true" sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Bpo.label}"
+                           id="c32" align="center"
+                           inlineStyle="color:Black; font-weight:bolder;">
+                  <af:outputText value="#{row.Bpo}" id="ot29"/>
+                </af:column>
+                <af:column sortProperty="Season" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Season.label}"
+                           id="c43" visible="false">
+                  <af:outputText value="#{row.Season}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="Style" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Style.label}"
+                           id="c42" visible="false">
+                  <af:outputText value="#{row.Style}" id="ot32"/>
+                </af:column>
+                <af:column sortProperty="Color" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Color.label}"
+                           id="c26"
+                           align="center"
+                           inlineStyle="color:Black; font-weight:bolder;;">
+                  <af:outputText value="#{row.Color}" id="ot18"/>
+                </af:column>
+                <af:column sortProperty="SystemId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.SystemId.label}"
+                           id="c27" visible="false">
+                  <af:outputText value="#{row.SystemId}" id="ot28">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.SystemId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="BuyerId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.BuyerId.label}"
+                           id="c39" visible="false">
+                  <af:outputText value="#{row.BuyerId}" id="ot30">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.BuyerId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="WashName" filterable="true"
+                           sortable="true"
+                           headerText="Wash Name"
+                           id="c23"
+                           inlineStyle="color:Black; font-weight:bolder;" align="center">
+                  <af:outputText value="#{row.WashName}" id="ot16"/>
+                </af:column>
+                <af:column sortProperty="BpoId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.BpoId.label}"
+                           id="c41" visible="false">
+                  <af:outputText value="#{row.BpoId}" id="ot13">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.BpoId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Fob" filterable="true" sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Fob.label}"
+                           id="c22"
+                           inlineStyle="color:Black; font-weight:bolder;">
+                  <af:outputText value="#{row.Fob}" id="ot25">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.Fob.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Qty" filterable="true" sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Qty.label}"
+                           id="c38"
+                           inlineStyle="color:Black; font-weight:bolder;background-color:#{(row.Bpo eq null ?'Green':'')}"
+                           align="center">
+                  <af:outputText value="#{row.Qty}" id="ot27">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.Qty.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Classification" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Classification.label}"
+                           id="c34"
+                           inlineStyle="color:Black; font-weight:bolder;"
+                           align="center">
+                  <af:outputText value="#{row.Classification}" id="ot20"/>
+                </af:column>
+                <af:column sortProperty="PoType" filterable="true"
+                           sortable="true" headerText="Po Type" id="c36"
+                           align="center"
+                           inlineStyle="color:Black; font-weight:bolder;">
+                  <af:outputText value="#{row.PoType}" id="ot14"/>
+                </af:column>
+                <af:column sortProperty="Incoterms" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Incoterms.label}"
+                           id="c29"
+                           inlineStyle="color:Black; font-weight:bolder;"
+                           align="center">
+                  <af:outputText value="#{row.Incoterms}" id="ot15"/>
+                </af:column>
+                <af:column sortProperty="Shipmode" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Shipmode.label}"
+                           id="c35"
+                           inlineStyle="color:Black; font-weight:bolder;"
+                           align="center">
+                  <af:outputText value="#{row.Shipmode}" id="ot17"/>
+                </af:column>
+                <af:column sortProperty="Country" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Country.label}"
+                           id="c31" align="center"
+                           inlineStyle="color:Black; font-weight:bolder;">
+                  <af:outputText value="#{row.Country}" id="ot19"/>
+                </af:column>
+                <af:column sortProperty="BpoStatus" filterable="true"
+                           sortable="true" headerText="Bpo Status" id="c24"
+                           align="center" visible="false">
+                  <af:outputText value="#{row.BpoStatus}" id="ot12">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.BpoStatus.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Shipdate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Shipdate.label}"
+                           id="c33" align="center"
+                           inlineStyle="color:Black; font-weight:bolder;">
+                  <af:outputText value="#{row.Shipdate}" id="ot22"/>
+                </af:column>
+                <af:column sortProperty="Parent" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Parent.label}"
+                           id="c40"
+                           inlineStyle="color:Window; background-color:Black;"
+                           align="center" rendered="false">
+                  <af:outputText value="#{row.Parent}" id="ot24">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.Parent.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Enddate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.Enddate.label}"
+                           id="c28" align="center" visible="false">
+                  <af:outputText value="#{row.Enddate}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="SlNo" filterable="true" sortable="true"
+                           headerText="#{bindings.SumOfView_bpo_info_t1.hints.SlNo.label}"
+                           id="c25"
+                           inlineStyle="color:Window; background-color:Black;"
+                           align="center" visible="false">
+                  <af:outputText value="#{row.SlNo}" id="ot31">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SumOfView_bpo_info_t1.hints.SlNo.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p3" contentDelivery="lazyUncached">
+          <af:dialog id="d4" title="SizeBrkDown" type="none">
+            <af:panelCollection id="pc3">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t5">
+                  <af:commandButton actionListener="#{bindings.CreateInsert1.execute}"
+                                    id="cb11" icon="/icon/create-new.png"
+                                    partialSubmit="true"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Create New"/>
+                  <af:commandButton actionListener="#{bindings.Delete1.execute}"
+                                    id="cb12"
+                                    icon="/icon/delete_red - Copy.png" partialSubmit="true"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Delete This Row"/>
+                  <af:commandButton actionListener="#{bpobean.save}"
+                                    id="cb13" icon="/icon/save new.png"
+                                    partialSubmit="true"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Save All"/>
+                  <af:commandButton id="cb14" text="CSV"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    partialSubmit="true">
+                    <af:exportCollectionActionListener exportedId="t4"
+                                                       type="excelHTML"
+                                                       filename="Sizw Wise Details.xls"/>
+                  </af:commandButton>
+                  <af:inputFile id="if2"
+                                inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px; width:auto;"
+                                valueChangeListener="#{bpobean.sizeUpload}"
+                                autoSubmit="true"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.XxOmSizewiseLTVO2.collectionModel}"
+                        var="row" rows="#{bindings.XxOmSizewiseLTVO2.rangeSize}"
+                        emptyText="#{bindings.XxOmSizewiseLTVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.XxOmSizewiseLTVO2.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.XxOmSizewiseLTVO2Query.queryDescriptor}"
+                        queryListener="#{bindings.XxOmSizewiseLTVO2Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.XxOmSizewiseLTVO2.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxOmSizewiseLTVO2.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t4"
+                        partialTriggers="::cb11 ::cb12 ::cb13 ::if2"
+                        editingMode="clickToEdit"
+                        binding="#{bpobean.sizewisel}"
+                        inlineStyle="width:auto;">
+                <af:column sortProperty="LineId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.LineId.label}"
+                           id="c51" visible="false">
+                  <af:inputText value="#{row.bindings.LineId.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.LineId.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.LineId.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.LineId.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.LineId.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.LineId.tooltip}"
+                                id="it5">
+                    <f:validator binding="#{row.bindings.LineId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO2.hints.LineId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="HeaderId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.label}"
+                           id="c46" visible="false">
+                  <af:inputText value="#{row.bindings.HeaderId.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.tooltip}"
+                                id="it6">
+                    <f:validator binding="#{row.bindings.HeaderId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO2.hints.HeaderId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="SizeName" filterable="true"
+                           sortable="true"
+                           headerText="SizevName"
+                           id="c52">
+                  <af:inputText value="#{row.bindings.SizeName.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.SizeName.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.SizeName.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.SizeName.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.SizeName.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.SizeName.tooltip}"
+                                id="it8">
+                    <f:validator binding="#{row.bindings.SizeName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="Qty" filterable="true" sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.Qty.label}"
+                           id="c45" align="center">
+                  <af:inputText value="#{row.bindings.Qty.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.Qty.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.Qty.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.Qty.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.Qty.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.Qty.tooltip}"
+                                id="it1">
+                    <f:validator binding="#{row.bindings.Qty.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO2.hints.Qty.format}"/>
+                  </af:inputText>
+                  <f:facet name="footer">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                         inlineStyle="width:auto;">
+                      <af:outputText value="Total:" id="ot35"
+                                     inlineStyle="color:Blue; font-family:Calibri; font-size:medium; font-weight:bolder; text-align:center; vertical-align:middle;"/>
+                      <af:outputText value="#{bindings.TotalSizeQuantity.inputValue}"
+                                     id="ot36"
+                                     inlineStyle="color:Black; font-size:x-small; font-weight:bolder;">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.TotalSizeQuantity.format}"/>
+                      </af:outputText>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:column>
+                <af:column sortProperty="CreatedBy" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.label}"
+                           id="c48" visible="false">
+                  <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.tooltip}"
+                                id="it2">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO2.hints.CreatedBy.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="CreationDate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.CreationDate.label}"
+                           id="c50" visible="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                  id="id8"/>
+                  </f:facet>
+                  <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.CreationDate.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.CreationDate.mandatory}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.CreationDate.tooltip}"
+                                id="id5">
+                    <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.XxOmSizewiseLTVO2.hints.CreationDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column sortProperty="LastUpdatedBy" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.label}"
+                           id="c47" visible="false">
+                  <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.tooltip}"
+                                id="it7">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedBy.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="LastUpdatedDate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedDate.label}"
+                           id="c49" visible="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.LastUpdatedDate}"
+                                  id="id7"/>
+                  </f:facet>
+                  <af:inputDate value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedDate.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedDate.mandatory}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedDate.tooltip}"
+                                id="id6">
+                    <f:validator binding="#{row.bindings.LastUpdatedDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.XxOmSizewiseLTVO2.hints.LastUpdatedDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column sortProperty="BpoId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.label}"
+                           id="c53" visible="false">
+                  <af:inputText value="#{row.bindings.BpoId.inputValue}"
+                                label="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.label}"
+                                required="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.mandatory}"
+                                columns="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.displayWidth}"
+                                maximumLength="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.precision}"
+                                shortDesc="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.tooltip}"
+                                id="it4">
+                    <f:validator binding="#{row.bindings.BpoId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO2.hints.BpoId.format}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p4" contentDelivery="lazyUncached">
+          <af:dialog id="d5" title="Multiple Sizewise Upload" type="none"
+                     resize="on"
+                     inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;">
+            <af:panelCollection id="pc4" inlineStyle="width:1000.0px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t6">
+                  <af:commandButton text="Download Csv" id="cb18"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    visible="false">
+                    <af:exportCollectionActionListener exportedId="t7"
+                                                       type="excelHTML"
+                                                       filename="Sizw Wise Multiple up format.xls"
+                                                       exportedRows="selected"/>
+                  </af:commandButton>
+                  <af:commandButton actionListener="#{bindings.Delete2.execute}"
+                                    disabled="#{!bindings.Delete2.enabled}"
+                                    id="cb17"
+                                    icon="/icon/delete_red - Copy.png"
+                                    partialSubmit="true"/>
+                  <af:commandButton actionListener="#{bindings.Commit.execute}"
+                                    id="cb16" text="save"
+                                    icon="/icon/save new.png"
+                                    partialSubmit="true"
+                                    inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                    shortDesc="Save all"/>
+                  <af:inputFile label="Multiple SIzeBrk Upload" id="inputFile1"
+                                inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;"
+                                shortDesc="Upload multiple size break down"
+                                valueChangeListener="#{bpobean.sizeUploadMultiple}"
+                                autoSubmit="true"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.XxOmSizewiseLTVO1.collectionModel}"
+                        var="row" rows="#{bindings.XxOmSizewiseLTVO1.rangeSize}"
+                        emptyText="#{bindings.XxOmSizewiseLTVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.XxOmSizewiseLTVO1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.XxOmSizewiseLTVO1Query.queryDescriptor}"
+                        queryListener="#{bindings.XxOmSizewiseLTVO1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.XxOmSizewiseLTVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxOmSizewiseLTVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t7"
+                        partialTriggers=" ::cb18"
+                        visible="true"
+                       
+                        binding="#{bpobean.sizewisemultipleup}"
+                        inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px;">
+                <af:column sortProperty="BpoId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.BpoId.label}"
+                           id="c63" partialTriggers="::cb17 ::cb16 ">
+                  <af:outputText value="#{row.BpoId}" id="ot45"
+                                 inlineStyle="color:Black; font-weight:bold;">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.BpoId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="Bpo" filterable="true" sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.Bpo.label}"
+                           id="c55">
+                  <af:outputText value="#{row.Bpo}" id="ot47"
+                                 inlineStyle="font-weight:bold;"/>
+                </af:column>
+                <af:column sortProperty="SizeName" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.SizeName.label}"
+                           id="c58">
+                  <af:outputText value="#{row.SizeName}" id="ot38"
+                                 inlineStyle="font-weight:bold;"/>
+                </af:column>
+                <af:column sortProperty="Qty" filterable="true" sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.Qty.label}"
+                           id="c57">
+                  <af:outputText value="#{row.Qty}" id="ot43"
+                                 inlineStyle="font-weight:bold;">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.Qty.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="LineId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.LineId.label}"
+                           id="c61" visible="false">
+                  <af:outputText value="#{row.LineId}" id="ot44">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.LineId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="HeaderId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.HeaderId.label}"
+                           id="c59" visible="false">
+                  <af:outputText value="#{row.HeaderId}" id="ot37">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.HeaderId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="CreatedBy" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.CreatedBy.label}"
+                           id="c64" visible="false">
+                  <af:outputText value="#{row.CreatedBy}" id="ot39">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.CreatedBy.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="CreationDate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.CreationDate.label}"
+                           id="c54" visible="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                  id="id10"/>
+                  </f:facet>
+                  <af:outputText value="#{row.CreationDate}" id="ot41">
+                    <af:convertDateTime pattern="#{bindings.XxOmSizewiseLTVO1.hints.CreationDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="LastUpdatedBy" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.LastUpdatedBy.label}"
+                           id="c60" visible="false">
+                  <af:outputText value="#{row.LastUpdatedBy}" id="ot42">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.LastUpdatedBy.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="LastUpdatedDate" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.LastUpdatedDate.label}"
+                           id="c56" visible="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.LastUpdatedDate}"
+                                  id="id9"/>
+                  </f:facet>
+                  <af:outputText value="#{row.LastUpdatedDate}" id="ot46">
+                    <af:convertDateTime pattern="#{bindings.XxOmSizewiseLTVO1.hints.LastUpdatedDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="TotalSizeQuantity" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.XxOmSizewiseLTVO1.hints.TotalSizeQuantity.label}"
+                           id="c62" visible="false">
+                  <af:outputText value="#{row.TotalSizeQuantity}" id="ot40">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmSizewiseLTVO1.hints.TotalSizeQuantity.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p5" contentDelivery="lazyUncached">
+          <af:dialog id="d6" type="none"
+                     inlineStyle="border-color:Black; border-style:solid; border-width:2.0px;">
+            <af:outputText value="Upload Multiple Size breakdown" id="ot48"
+                           inlineStyle="color:Black; font-family:'Courier New', Courier, monospace; font-size:medium; font-weight:bolder;"/>
+            <af:inputFile label="Multiple SIzeBrk Upload" id="inputFile2"
+                          inlineStyle="color:Black; vertical-align:middle; text-align:center; border-color:Black; border-style:solid; border-width:2px; width:10.0px;"
+                          shortDesc="Upload multiple size break down"
+                          valueChangeListener="#{bpobean.sizeUploadMultiple}"
+                          autoSubmit="true"/>
+          </af:dialog>
+        </af:popup>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

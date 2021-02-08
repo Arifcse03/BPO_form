@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxOmBpoInfoTVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="model.views.XxOmBpoInfoTVOImpl"
+  ComponentInterface="model.views.common.XxOmBpoInfoTVO"
+  ClientProxyName="model.views.client.XxOmBpoInfoTVOClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="param"
+    Kind="where"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="FOBLOV1"
+    ViewObjectName="model.views.FOBLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ShipmodeLOv1"
+    ViewObjectName="model.lov.ShipmodeLOv"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ClassificLov1"
+    ViewObjectName="model.lov.ClassificLov"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="IncoTerm_Lov1"
+    ViewObjectName="model.lov.IncoTerm_Lov"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PoType_lov1"
+    ViewObjectName="model.lov.PoType_lov"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Country_Lov1"
+    ViewObjectName="model.lov.Country_Lov">
+    <ViewCriteriaUsage
+      Name="Country_LovCriteria"
+      FullName="model.lov.Country_Lov.Country_LovCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="buyerid">
+        <TransientExpression><![CDATA[BuyerId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="StatusLov1"
+    ViewObjectName="model.lov.StatusLov"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_FobId"
+    ListVOName="FOBLOV1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_FobId_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FobId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FobId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FobId"/>
+      <Item Value="Fob"/>
+      <Item Value="PocId"/>
+      <Item Value="Color"/>
+      <Item Value="SystemId"/>
+      <Item Value="WashName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Shipmode"
+    ListVOName="ShipmodeLOv1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Shipmode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ShipMode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ShipMode"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Classification"
+    ListVOName="ClassificLov1"
+    ListRangeSize="-1"
+    NullValueFlag="end"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Classification"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Incoterms"
+    ListVOName="IncoTerm_Lov1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Incoterms"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PoType"
+    ListVOName="PoType_lov1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PoType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Country"
+    ListVOName="Country_Lov1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Country"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="StatusLov1"
+    ListRangeSize="-1"
+    NullValueFlag="end"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValueMeaning"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT XxOmBpoInfoTEO.BPO_ID, 
+       XxOmBpoInfoTEO.FOB_ID, 
+       XxOmBpoInfoTEO.BPO, 
+       XxOmBpoInfoTEO.QTY, 
+       XxOmBpoInfoTEO.SHIPDATE, 
+       XxOmBpoInfoTEO.CLASSIFICATION, 
+       XxOmBpoInfoTEO.PO_TYPE, 
+       XxOmBpoInfoTEO.PARENT, 
+       XxOmBpoInfoTEO.STATUS, 
+       XxOmBpoInfoTEO.INCOTERMS, 
+       XxOmBpoInfoTEO.ENDDATE, 
+       XxOmBpoInfoTEO.SHIPMODE, 
+       XxOmBpoInfoTEO.COUNTRY,
+       v.system_id,
+       v.poc_Id,
+       v.buyer_id,
+       v.season,
+       v.style,
+       v.wash_name,
+       v.color,
+       v.fob,
+     (select SUM(QTY)   FROM XX_OM_SIZEWISE_L_T A
+         WHERE A.Bpo_ID = XxOmBpoInfoTEO.BPO_Id)
+        Total_Size_Quantity
+FROM XX_OM_BPO_INFO_T XxOmBpoInfoTEO, XX_ORDER_INFO_V v
+WHERE 1=:param and XxOmBpoInfoTEO.Fob_id = v.Fob_id AND XxOmBpoInfoTEO.BPO_ID = v.bpo_id
+order by FOB_ID desc, PARENT DESC ,BPO_ID ASC]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="XxOmBpoInfoTEO"
+    Entity="model.entity.XxOmBpoInfoTEO"/>
+  <ViewAttribute
+    Name="BpoId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BpoId"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="BPO_ID"/>
+  <ViewAttribute
+    Name="FobId"
+    PrecisionRule="true"
+    EntityAttrName="FobId"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="FOB_ID"
+    LOVName="LOV_FobId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Bpo"
+    PrecisionRule="true"
+    EntityAttrName="Bpo"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="BPO"/>
+  <ViewAttribute
+    Name="Qty"
+    PrecisionRule="true"
+    EntityAttrName="Qty"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="QTY"/>
+  <ViewAttribute
+    Name="Shipdate"
+    PrecisionRule="true"
+    EntityAttrName="Shipdate"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="SHIPDATE"/>
+  <ViewAttribute
+    Name="Classification"
+    PrecisionRule="true"
+    EntityAttrName="Classification"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="CLASSIFICATION"
+    LOVName="LOV_Classification">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoType"
+    PrecisionRule="true"
+    EntityAttrName="PoType"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="PO_TYPE"
+    LOVName="LOV_PoType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Parent"
+    PrecisionRule="true"
+    EntityAttrName="Parent"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="PARENT"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="STATUS"
+    LOVName="LOV_Status">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Incoterms"
+    PrecisionRule="true"
+    EntityAttrName="Incoterms"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="INCOTERMS"
+    LOVName="LOV_Incoterms">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Enddate"
+    PrecisionRule="true"
+    EntityAttrName="Enddate"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="ENDDATE"/>
+  <ViewAttribute
+    Name="Shipmode"
+    PrecisionRule="true"
+    EntityAttrName="Shipmode"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="SHIPMODE"
+    LOVName="LOV_Shipmode">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Country"
+    PrecisionRule="true"
+    EntityAttrName="Country"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="COUNTRY"
+    LOVName="LOV_Country">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SystemId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SYSTEM_ID"
+    Expression="SYSTEM_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="POC_ID"
+    Expression="POC_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuyerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BUYER_ID"
+    Expression="BUYER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Season"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEASON"
+    Expression="SEASON"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Style"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STYLE"
+    Expression="STYLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WashName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="WASH_NAME"
+    Expression="WASH_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Color"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COLOR"
+    Expression="COLOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Fob"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FOB"
+    Expression="FOB"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSizeQuantity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_SIZE_QUANTITY"
+    Expression="TOTAL_SIZE_QUANTITY"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="XxOmSizewiseLTVO"
+    ViewLink="model.ViewLink.sizewiseLtViabpoInfoTVL"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ClientInterface>
+    <Method
+      Name="getpocid">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="PocId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

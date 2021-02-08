@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="ViewPgPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variableUsage DataControl="AppModuleDataControl"
+                     Binds="SumOfView_bpo_info_t1.variablesMap.p"
+                     Name="ExecuteWithParams_p" IsQueriable="false"/>
+    </variableIterator>
+    <iterator Binds="SumOfView_bpo_info_t1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="SumOfView_bpo_info_t1Iterator"/>
+    <searchRegion Binds="SumOfView_bpo_info_t1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SumOfView_bpo_info_t1Query"/>
+  </executables>
+  <bindings>
+    <action IterBinding="SumOfView_bpo_info_t1Iterator" id="ExecuteWithParams"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="p" NDType="java.lang.String"
+                 NDValue="${bindings.ExecuteWithParams_p}"/>
+    </action>
+    <attributeValues IterBinding="variables" id="p">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_p"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SumOfView_bpo_info_t1Iterator"
+          id="SumOfView_bpo_info_t1">
+      <nodeDefinition DefName="model.views.SumOfView_bpo_info_t"
+                      Name="SumOfView_bpo_info_t10">
+        <AttrNames>
+          <Item Value="PocId"/>
+          <Item Value="FobId"/>
+          <Item Value="SystemId"/>
+          <Item Value="BuyerId"/>
+          <Item Value="Season"/>
+          <Item Value="Style"/>
+          <Item Value="WashName"/>
+          <Item Value="Color"/>
+          <Item Value="BpoId"/>
+          <Item Value="Bpo"/>
+          <Item Value="Qty"/>
+          <Item Value="Fob"/>
+          <Item Value="Shipdate"/>
+          <Item Value="Classification"/>
+          <Item Value="PoType"/>
+          <Item Value="Parent"/>
+          <Item Value="BpoStatus"/>
+          <Item Value="Incoterms"/>
+          <Item Value="Enddate"/>
+          <Item Value="Shipmode"/>
+          <Item Value="Country"/>
+          <Item Value="SlNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

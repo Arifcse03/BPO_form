@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description rdf:about="/"/>
+  <rdf:Description rdf:about="p2">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="pc2">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="t3">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="m2">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      false
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="p4">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="t7">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="pc4">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+  <rdf:Description rdf:about="d5">
+    <customizationAllowed xmlns="http://xmlns.oracle.com/mds">
+      true
+    </customizationAllowed>
+  </rdf:Description>
+</rdf:RDF>
