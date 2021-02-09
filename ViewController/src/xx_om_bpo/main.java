@@ -506,11 +506,11 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
         } catch (Exception e) {
             ;
         }
-        try {
+        /*try {
             cloneRow.setAttribute("Qty", currRow.getAttribute("Qty"));
         } catch (Exception e) {
             ;
-        }
+        }*/
         try {
             cloneRow.setAttribute("Status", currRow.getAttribute("Status"));
         } catch (Exception e) {

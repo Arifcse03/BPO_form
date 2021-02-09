@@ -268,7 +268,7 @@
                                  
                                 id="it3" immediate="true" autoSubmit="true"
                                 required="true"
-                                readOnly="#{row.bindings.Parent != null ? true : false}">
+                                readOnly="#{row.bindings.Parent.inputValue eq null ? false : true}">
                     <f:validator binding="#{row.bindings.Qty.validator}"/>
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.XxOmBpoInfoTVO1.hints.Qty.format}"/>
@@ -285,7 +285,7 @@
                                       id="soc1"
                                       valueChangeListener="#{backinbean.value}"
                                       autoSubmit="true" required="true"
-                                      readOnly="#{row.bindings.Parent != null ? true : false}">
+                                      readOnly="#{row.bindings.Parent.inputValue eq null ? false : true}">
                     <f:selectItems value="#{row.bindings.Classification.items}"
                                    id="si1"/>
                     <f:attribute name="rowIndexVal"
