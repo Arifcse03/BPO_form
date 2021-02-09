@@ -267,7 +267,8 @@
                                 shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Qty.tooltip}"
                                  
                                 id="it3" immediate="true" autoSubmit="true"
-                                required="true">
+                                required="true"
+                                readOnly="#{row.bindings.Parent != null ? true : false}">
                     <f:validator binding="#{row.bindings.Qty.validator}"/>
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.XxOmBpoInfoTVO1.hints.Qty.format}"/>
@@ -283,7 +284,8 @@
                                       shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Classification.tooltip}"
                                       id="soc1"
                                       valueChangeListener="#{backinbean.value}"
-                                      autoSubmit="true" required="true">
+                                      autoSubmit="true" required="true"
+                                      readOnly="#{row.bindings.Parent != null ? true : false}">
                     <f:selectItems value="#{row.bindings.Classification.items}"
                                    id="si1"/>
                     <f:attribute name="rowIndexVal"
