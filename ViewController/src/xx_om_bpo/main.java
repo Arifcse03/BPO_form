@@ -608,7 +608,10 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
         // String Buyer = null;
         int OrgId = 0;
         
-        
+        String message=null;
+        String message1=null;
+        String message2=null;
+        String message3=null;
         /**code for disabling the create button*/
         
         if(rowcount!=0){
@@ -621,7 +624,7 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
         poc = 0;
         }
 
-        String stmt = "BEGIN xx_om_bpo_create (:1); end;";
+        String stmt = "BEGIN XX_OM_BPO_CREATE1(:1,:2,:3,:4,:5); end;";
 
         java.sql.CallableStatement cs =
         appM.getDBTransaction().createCallableStatement(stmt, 1);
@@ -629,23 +632,34 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
 
 
         cs.setInt(1, poc);
-
+        cs.registerOutParameter(2, oracle.jdbc.OracleTypes.VARCHAR);
+        cs.registerOutParameter(3, oracle.jdbc.OracleTypes.VARCHAR);
+        cs.registerOutParameter(4, oracle.jdbc.OracleTypes.VARCHAR);
+        cs.registerOutParameter(5, oracle.jdbc.OracleTypes.VARCHAR);
+            
 
         cs.execute();
-
+        message = cs.getString(2);
+        message1 = cs.getString(3);  
+        message2= cs.getString(4);
+        message3= cs.getString(5);    
         cs.close();
-
+            
 
         } catch (SQLException e) {
         e.printStackTrace();
 
         }
-       
+            
         processvo.executeQuery();
-        AdfFacesContext.getCurrentInstance().addPartialTarget(bpoTable);
-      
-        }
        
+        AdfFacesContext.getCurrentInstance().addPartialTarget(bpoTable);
+            if (message!=null){showMessage(message,"info");}
+            if (message1 !=null){showMessage(message1,"info");}
+            if (message2 !=null){showMessage(message2,"info");}
+            if (message3 !=null){showMessage(message3,"info");}  
+        }
+        
         
         return null;
     }
