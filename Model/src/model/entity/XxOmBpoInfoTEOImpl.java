@@ -1,5 +1,9 @@
 package model.entity;
 
+import java.sql.SQLException;
+
+import java.util.Map;
+
 import model.services.AppModuleImpl;
 
 import model.views.seq_BpoIdVORowImpl;
@@ -7,6 +11,8 @@ import model.views.seq_BpoIdVORowImpl;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
+
+import oracle.adf.share.ADFContext;
 
 import oracle.jbo.ApplicationModule;
 import oracle.jbo.AttributeList;
@@ -165,13 +171,53 @@ public class XxOmBpoInfoTEOImpl extends EntityImpl {
             }
         }
         ,
+        CreatedBy {
+            public Object get(XxOmBpoInfoTEOImpl obj) {
+                return obj.getCreatedBy();
+            }
+
+            public void put(XxOmBpoInfoTEOImpl obj, Object value) {
+                obj.setCreatedBy((Number)value);
+            }
+        }
+        ,
+        CreationDate {
+            public Object get(XxOmBpoInfoTEOImpl obj) {
+                return obj.getCreationDate();
+            }
+
+            public void put(XxOmBpoInfoTEOImpl obj, Object value) {
+                obj.setCreationDate((Date)value);
+            }
+        }
+        ,
+        LastUpdatedBy {
+            public Object get(XxOmBpoInfoTEOImpl obj) {
+                return obj.getLastUpdatedBy();
+            }
+
+            public void put(XxOmBpoInfoTEOImpl obj, Object value) {
+                obj.setLastUpdatedBy((Number)value);
+            }
+        }
+        ,
+        LastUpdationDate {
+            public Object get(XxOmBpoInfoTEOImpl obj) {
+                return obj.getLastUpdationDate();
+            }
+
+            public void put(XxOmBpoInfoTEOImpl obj, Object value) {
+                obj.setLastUpdationDate((Date)value);
+            }
+        }
+        ,
         XxOmSizewiseLTEO {
             public Object get(XxOmBpoInfoTEOImpl obj) {
                 return obj.getXxOmSizewiseLTEO();
             }
 
             public void put(XxOmBpoInfoTEOImpl obj, Object value) {
-                obj.setXxOmSizewiseLTEO((EntityImpl)value);
+                obj.setXxOmSizewiseLTEO((XxOmSizewiseLTEOImpl)value);
             }
         }
         ,
@@ -226,6 +272,10 @@ public class XxOmBpoInfoTEOImpl extends EntityImpl {
     public static final int ENDDATE = AttributesEnum.Enddate.index();
     public static final int SHIPMODE = AttributesEnum.Shipmode.index();
     public static final int COUNTRY = AttributesEnum.Country.index();
+    public static final int CREATEDBY = AttributesEnum.CreatedBy.index();
+    public static final int CREATIONDATE = AttributesEnum.CreationDate.index();
+    public static final int LASTUPDATEDBY = AttributesEnum.LastUpdatedBy.index();
+    public static final int LASTUPDATIONDATE = AttributesEnum.LastUpdationDate.index();
     public static final int XXOMSIZEWISELTEO = AttributesEnum.XxOmSizewiseLTEO.index();
     public static final int SEQ_BPOIDVO1 = AttributesEnum.seq_BpoIdVO1.index();
 
@@ -469,6 +519,70 @@ public class XxOmBpoInfoTEOImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for CreatedBy, using the alias name CreatedBy.
+     * @return the CreatedBy
+     */
+    public Number getCreatedBy() {
+        return (Number)getAttributeInternal(CREATEDBY);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CreatedBy.
+     * @param value value to set the CreatedBy
+     */
+    public void setCreatedBy(Number value) {
+        setAttributeInternal(CREATEDBY, value);
+    }
+
+    /**
+     * Gets the attribute value for CreationDate, using the alias name CreationDate.
+     * @return the CreationDate
+     */
+    public Date getCreationDate() {
+        return (Date)getAttributeInternal(CREATIONDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CreationDate.
+     * @param value value to set the CreationDate
+     */
+    public void setCreationDate(Date value) {
+        setAttributeInternal(CREATIONDATE, value);
+    }
+
+    /**
+     * Gets the attribute value for LastUpdatedBy, using the alias name LastUpdatedBy.
+     * @return the LastUpdatedBy
+     */
+    public Number getLastUpdatedBy() {
+        return (Number)getAttributeInternal(LASTUPDATEDBY);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for LastUpdatedBy.
+     * @param value value to set the LastUpdatedBy
+     */
+    public void setLastUpdatedBy(Number value) {
+        setAttributeInternal(LASTUPDATEDBY, value);
+    }
+
+    /**
+     * Gets the attribute value for LastUpdationDate, using the alias name LastUpdationDate.
+     * @return the LastUpdationDate
+     */
+    public Date getLastUpdationDate() {
+        return (Date)getAttributeInternal(LASTUPDATIONDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for LastUpdationDate.
+     * @param value value to set the LastUpdationDate
+     */
+    public void setLastUpdationDate(Date value) {
+        setAttributeInternal(LASTUPDATIONDATE, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -504,14 +618,14 @@ public class XxOmBpoInfoTEOImpl extends EntityImpl {
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getXxOmSizewiseLTEO() {
-        return (EntityImpl)getAttributeInternal(XXOMSIZEWISELTEO);
+    public XxOmSizewiseLTEOImpl getXxOmSizewiseLTEO() {
+        return (XxOmSizewiseLTEOImpl)getAttributeInternal(XXOMSIZEWISELTEO);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setXxOmSizewiseLTEO(EntityImpl value) {
+    public void setXxOmSizewiseLTEO(XxOmSizewiseLTEOImpl value) {
         setAttributeInternal(XXOMSIZEWISELTEO, value);
     }
 
@@ -569,11 +683,38 @@ public class XxOmBpoInfoTEOImpl extends EntityImpl {
     }
 
     /**
-     * Custom DML update/insert/delete logic here.
-     * @param operation the operation type
-     * @param e the transaction event
-     */
-    protected void doDML(int operation, TransactionEvent e) {
-        super.doDML(operation, e);
-    }
+            * Custom DML update/insert/delete logic here.
+            * @param operation the operation type
+            * @param e the transaction event
+            */
+            protected void doDML(int operation, TransactionEvent e) {             
+                 Map sessionScope = ADFContext.getCurrent().getSessionScope();   
+                 String user = (String)sessionScope.get("userId");
+          //            String user = "6489";
+               //  String respId = (String)sessionScope.get("respId");
+          //            String respId = "5555";
+                  if (DML_INSERT == operation){
+                      try {
+                          System.out.println("@In INSERT DODML");
+                          System.out.println("operation number: " + operation);
+                          setCreationDate((Date)Date.getCurrentDate());
+                          setCreatedBy(new oracle.jbo.domain.Number(user));
+                         // setRespId(new oracle.jbo.domain.Number(respId));
+                      } catch (SQLException f) {
+                          System.out.println(f.getMessage());
+                      }
+                  }
+                  if(DML_UPDATE == operation){
+                     try {
+                         System.out.println("@In UPDATE DODML");
+                         System.out.println("operation number: " + operation);
+                         setLastUpdationDate((Date)Date.getCurrentDate());
+                         setLastUpdatedBy(new oracle.jbo.domain.Number(user)); 
+                     } catch (SQLException f) {
+                        System.out.println(f.getMessage());
+                     }
+                  }
+                  super.doDML(operation, e);
+           }
+                   
 }

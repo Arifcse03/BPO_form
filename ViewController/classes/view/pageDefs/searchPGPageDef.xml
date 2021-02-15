@@ -61,6 +61,10 @@
           <Item Value="WashName"/>
           <Item Value="Color"/>
           <Item Value="Fob"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdationDate"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

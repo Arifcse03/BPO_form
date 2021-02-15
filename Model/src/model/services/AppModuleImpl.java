@@ -3,6 +3,11 @@ package model.services;
 import java.awt.event.ActionEvent;
 
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import javax.servlet.http.HttpSession;
+
 import model.lov.Country_LovImpl;
 
 import oracle.jbo.Row;
@@ -96,4 +101,28 @@ public class AppModuleImpl extends ApplicationModuleImpl {
     public ViewObjectImpl getpoc_searchVO1() {
         return (ViewObjectImpl)findViewObject("poc_searchVO1");
     }
+    
+    public void setSessionValues( String userId) {
+
+            System.out.println("UserId....." + userId);
+            //System.out.println("OrgID..." + orgId);
+
+            
+
+
+            if (userId != null) {
+                FacesContext fctx = FacesContext.getCurrentInstance();
+                ExternalContext ectx = fctx.getExternalContext();
+                HttpSession userSession = (HttpSession)ectx.getSession(false);
+                userSession.setAttribute("userId", userId);
+                 
+        
+        
+            }
+        }
+    
+    
+    
+    
+    
 }

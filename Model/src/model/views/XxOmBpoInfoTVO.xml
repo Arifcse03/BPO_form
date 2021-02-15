@@ -213,7 +213,11 @@
        v.fob,
      (select SUM(QTY)   FROM XX_OM_SIZEWISE_L_T A
          WHERE A.Bpo_ID = XxOmBpoInfoTEO.BPO_Id)
-        Total_Size_Quantity
+        Total_Size_Quantity,
+XxOmBpoInfoTEO.CREATED_BY,
+XxOmBpoInfoTEO.CREATION_DATE,
+XxOmBpoInfoTEO.LAST_UPDATED_BY,
+XxOmBpoInfoTEO.LAST_UPDATION_DATE
 FROM XX_OM_BPO_INFO_T XxOmBpoInfoTEO, XX_ORDER_INFO_V v
 WHERE 1=:param and XxOmBpoInfoTEO.Fob_id = v.Fob_id AND XxOmBpoInfoTEO.BPO_ID = v.bpo_id
 order by FOB_ID desc, PARENT DESC ,BPO_ID ASC]]>
@@ -489,6 +493,30 @@ order by FOB_ID desc, PARENT DESC ,BPO_ID ASC]]>
       <Attr Name="_DisplaySize" Value="39"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdationDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdationDate"
+    EntityUsage="XxOmBpoInfoTEO"
+    AliasName="LAST_UPDATION_DATE"/>
   <ViewLinkAccessor
     Name="XxOmSizewiseLTVO"
     ViewLink="model.ViewLink.sizewiseLtViabpoInfoTVL"

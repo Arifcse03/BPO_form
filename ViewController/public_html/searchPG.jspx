@@ -267,8 +267,7 @@
                                 shortDesc="#{bindings.XxOmBpoInfoTVO1.hints.Qty.tooltip}"
                                  
                                 id="it3" immediate="true" autoSubmit="true"
-                                required="true"
-                                readOnly="#{row.bindings.Parent.inputValue eq null ? false : true}">
+                                required="true">
                     <f:validator binding="#{row.bindings.Qty.validator}"/>
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.XxOmBpoInfoTVO1.hints.Qty.format}"/>
@@ -409,6 +408,40 @@
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.XxOmBpoInfoTVO1.hints.Parent.format}"/>
                   </af:inputText>
+                </af:column>
+                <af:column headerText="Created By"
+                           id="c65" align="center" sortable="true"
+                           filterable="true" sortProperty="CreatedBy"
+                           visible="false">
+                  <af:outputText value="#{row.CreatedBy}" id="ot49">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.CreatedBy.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="Creation Date"
+                           id="c66" align="center" sortable="true"
+                           filterable="true" sortProperty="CreationDate"
+                           visible="false">
+                  <af:outputText value="#{row.CreationDate}" id="ot50">
+                    <af:convertDateTime pattern="#{bindings.XxOmBpoInfoTVO1.hints.CreationDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="Last Updated By"
+                           id="c67" align="center" sortable="true"
+                           filterable="true" sortProperty="LastUpdatedBy"
+                           visible="false">
+                  <af:outputText value="#{row.LastUpdatedBy}" id="ot51">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxOmBpoInfoTVO1.hints.LastUpdatedBy.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="Last Updation Date"
+                           id="c68" align="center" sortable="true"
+                           filterable="true" sortProperty="LastUpdationDate"
+                           visible="false">
+                  <af:outputText value="#{row.LastUpdationDate}" id="ot52">
+                    <af:convertDateTime pattern="#{bindings.XxOmBpoInfoTVO1.hints.LastUpdationDate.format}"/>
+                  </af:outputText>
                 </af:column>
                 <af:column id="c44" headerText="SizeBrkDwn" align="center"
                            sortable="true" filterable="true">
