@@ -8,7 +8,9 @@
   InheritPersonalization="true"
   ClearCacheOnRollback="true"
   ComponentClass="model.services.AppModuleImpl"
-  DefClass="model.services.AppModuleDefImpl">
+  DefClass="model.services.AppModuleDefImpl"
+  ComponentInterface="model.services.common.AppModule"
+  ClientProxyName="model.services.client.AppModuleClient">
   <DesignTime>
     <Attr Name="_deployType" Value="0"/>
     <Attr Name="_isDefCodegen" Value="true"/>
@@ -44,4 +46,14 @@
     SrcViewUsageName="model.services.AppModule.XxOmBpoInfoTVO1"
     DstViewUsageName="model.services.AppModule.XxOmSizewiseLTVO2"
     Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="setSessionValues">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

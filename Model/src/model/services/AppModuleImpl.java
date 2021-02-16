@@ -10,6 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import model.lov.Country_LovImpl;
 
+import model.services.common.AppModule;
+
+import model.views.XxOmBpoInfoTVOImpl;
+
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.ViewObject;
@@ -22,7 +26,7 @@ import oracle.jbo.server.ViewObjectImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class AppModuleImpl extends ApplicationModuleImpl {
+public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     /**
      * This is the default constructor (do not remove).
      */
@@ -116,7 +120,7 @@ public class AppModuleImpl extends ApplicationModuleImpl {
                 HttpSession userSession = (HttpSession)ectx.getSession(false);
                 userSession.setAttribute("userId", userId);
                  
-        
+                System.out.println("User name is :"+userId);
         
             }
         }

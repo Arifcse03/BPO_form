@@ -30,6 +30,7 @@
                   id="XxOmSizewiseLTVO1Query"/>
     <iterator Binds="poc_searchVO1" RangeSize="25"
               DataControl="AppModuleDataControl" id="poc_searchVO1Iterator"/>
+    <invokeAction id="setUser" Binds="setSessionValues" Refresh="always"/>
   </executables>
   <bindings>
     <action IterBinding="XxOmBpoInfoTVO1Iterator" id="Delete"
@@ -160,6 +161,14 @@
                   InstanceName="AppModuleDataControl.XxOmBpoInfoTVO1"
                   IterBinding="XxOmBpoInfoTVO1Iterator">
       <NamedData NDName="PocId" NDValue="#{viewScope.PocId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="setSessionValues"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setSessionValues"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="userId" NDValue="#{viewScope.UserId}"
                  NDType="java.lang.String"/>
     </methodAction>
   </bindings>

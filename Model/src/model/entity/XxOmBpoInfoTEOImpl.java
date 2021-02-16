@@ -690,6 +690,7 @@ public class XxOmBpoInfoTEOImpl extends EntityImpl {
             protected void doDML(int operation, TransactionEvent e) {             
                  Map sessionScope = ADFContext.getCurrent().getSessionScope();   
                  String user = (String)sessionScope.get("userId");
+                System.out.println("User name is :"+user);
           //            String user = "6489";
                //  String respId = (String)sessionScope.get("respId");
           //            String respId = "5555";

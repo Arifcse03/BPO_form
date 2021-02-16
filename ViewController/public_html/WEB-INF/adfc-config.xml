@@ -6,6 +6,10 @@
       <from-value>#{param.PocId}</from-value>
       <to-value>#{viewScope.PocId}</to-value>
     </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamUserId}</from-value>
+      <to-value>#{viewScope.UserId}</to-value>
+    </input-page-parameter>
   </view>
   <view id="SearchPg">
     <page>/ViewPg.jspx</page>
