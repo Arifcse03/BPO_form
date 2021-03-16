@@ -171,5 +171,7 @@
       <NamedData NDName="userId" NDValue="#{viewScope.UserId}"
                  NDType="java.lang.String"/>
     </methodAction>
+    <listOfValues StaticList="false" IterBinding="poc_searchVO1Iterator"
+                  Uses="LOV_Style" id="Style"/>
   </bindings>
 </pageDefinition>

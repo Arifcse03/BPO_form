@@ -127,7 +127,7 @@ public class main {
         System.out.println("Fob ID:" + FobId);
         return FobId;
     }
-
+ /*** method to check if the qty grater than the TBA qty if so relavent Quentity will be change*/
     public void CheckMethod() {
         // Add event code here...
         ViewObject vo = appM.getXxOmBpoInfoTVO1();
@@ -146,7 +146,7 @@ public class main {
         vqty = vo.getCurrentRow().getAttribute("Qty").toString();
         // int pqty=Integer.parseInt(vqty);
         dqty = new Double(vqty);
-        ////code to get the value//
+        ////code to get the qty value//
         String query =
             " select Qty  " + " FROM  XX_OM_BPO_INFO_T t" + " WHERE   t.Fob_id=t.parent " +
             " and t.fob_id= '" + getFobId() + "' ";
@@ -168,7 +168,7 @@ public class main {
             System.out.println(e);
             throw new JboException(e);
         }
-        ///for checking if bpo is grater or not
+        ///for checking if bpo qty is grater or not
         if (dqty > prqty) {
         
         /**to set the tba value 0 if tba value less than bpo**/
@@ -551,6 +551,8 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
       
         ViewObject searchVO = appM.getpoc_searchVO1();
         String pocidfrom_pocform="0";
+       //// System.out.println(searchVO.getCurrentRow().getAttribute("Style").toString());
+        //System.out.println(searchVO.getCurrentRow().getAttribute("PocId").toString());
                
         try{
              pocidfrom_pocform=poCIDfrompoc.getValue().toString();
@@ -563,6 +565,7 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
         System.out.println(pocidfrom_pocform);
                 int PocId  = 0;
                 int PocId1=0;
+                String STYLE=null;
                 try {
                    PocId =Integer.parseInt(searchVO.getCurrentRow().getAttribute("PocId").toString());
                 } catch (Exception e) {
@@ -574,7 +577,11 @@ appM.getDBTransaction().createCallableStatement(pl, appM.getDBTransaction().DEFA
         } catch (Exception e) {
             PocId1 = 0;
         }
-            
+        try {
+           STYLE =searchVO.getCurrentRow().getAttribute("Style").toString();
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
       /****if(!pocidfrom_pocform.isEmpty()&& pocidfrom_pocform=="0"){
             
                 pocID_inputField.setValue(PocId );

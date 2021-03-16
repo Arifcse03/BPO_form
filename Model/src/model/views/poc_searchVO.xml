@@ -19,8 +19,37 @@
         ResId="model.views.poc_searchVO_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <ViewAccessor
+    Name="pocLov1"
+    ViewObjectName="model.lov.pocLov"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Style"
+    ListVOName="pocLov1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Style_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Style"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PocId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Style"/>
+      <Item Value="PocId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Style"/>
+      <Item Value="Season"/>
+      <Item Value="PocId"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
   <SQLQuery>
-    <![CDATA[select  '' POC_ID   from dual]]>
+    <![CDATA[select  '' POC_ID,''Style  from dual]]>
   </SQLQuery>
   <ViewAttribute
     Name="PocId"
@@ -36,6 +65,24 @@
       <SchemaBasedProperties>
         <DISPLAYWIDTH
           Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Style"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="32"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="STYLE"
+    Expression="STYLE"
+    SQLType="VARCHAR"
+    LOVName="LOV_Style">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

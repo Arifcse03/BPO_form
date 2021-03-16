@@ -34,9 +34,22 @@
                               id="it10" autoSubmit="true"
                               inlineStyle="color:MenuText;"
                               value="#{bindings.PocId.inputValue}"
-                             binding="#{backinbean.pocID_inputField}">
+                             binding="#{backinbean.pocID_inputField}"
+                              partialTriggers="styleId" visible="false">
                   <f:validator binding="#{bindings.PocId.validator}"/>
                 </af:inputText>
+                <af:inputListOfValues id="styleId"
+                                      popupTitle="Search and Select: #{bindings.Style.hints.label}"
+                                      value="#{bindings.Style.inputValue}"
+                                      label="#{bindings.Style.hints.label}"
+                                      model="#{bindings.Style.listOfValuesModel}"
+                                      required="#{bindings.Style.hints.mandatory}"
+                                      columns="#{bindings.Style.hints.displayWidth}"
+                                      shortDesc="#{bindings.Style.hints.tooltip}"
+                                      autoSubmit="true">
+                  <f:validator binding="#{bindings.Style.validator}"/>
+                  <af:autoSuggestBehavior suggestedItems="#{bindings.Style.suggestedItems}"/>
+                </af:inputListOfValues>
                 <af:commandButton text="Search" id="cb20"
                                   action="#{backinbean.action_call}"
                                   partialSubmit="true"
